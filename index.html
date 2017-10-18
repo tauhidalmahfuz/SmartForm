@@ -27,7 +27,7 @@
           <label for="exampleInputEmail1">Email address</label>
           <input type="email" class="form-control" id="email" placeholder="Email">
         </div>
-        <button id="nextbtn" disabled class="btn btn-success">Next</button>
+        <button id="nextbtn"  class="btn btn-success">Next</button>
       </div>
     </div>
     <!-- Question 1 END -->
@@ -45,24 +45,24 @@
     <div class="row jumbotron question" id="q2a">
       <div class="col-sm-6">
         <p>What do you <strong>like</strong> about HTML?</p>
-        <div class="checkbox">
+        <div id="htmlLikeCHeckbox" class="checkbox">
           <label>
-          <input name="likesHTML" type="checkbox"> Learning the basics is trivial
+          <input name="likesHTML" class="htmlLckeckbox"type="checkbox"> Learning the basics is trivial
         </label>
         </div>
         <div class="checkbox">
           <label>
-          <input name="likesHTML" type="checkbox"> No hassle: write code in a text editor and open in Browser
+          <input name="likesHTML" class="htmlLckeckbox" type="checkbox"> No hassle: write code in a text editor and open in Browser
         </label>
         </div>
         <div class="checkbox">
           <label>
-          <input name="likesHTML" type="checkbox"> Tags are easy to remember
+          <input name="likesHTML" class="htmlLckeckbox"type="checkbox"> Tags are easy to remember
         </label>
         </div>
         <div class="checkbox">
           <label>
-          <input name="likesHTML" type="checkbox"> HTML5 features like canvas are powerful
+          <input name="likesHTML" class="htmlLckeckbox" type="checkbox"> HTML5 features like canvas are powerful
         </label>
         </div>
       </div>
@@ -90,7 +90,7 @@
         </div>
         <div class="btnRight">
           <button class="previousbtn"><span class="glyphicon glyphicon-chevron-left"></span> Previous</button>
-          <button class="btn btn-success">Next <span class="glyphicon glyphicon-chevron-right"></span></button>
+          <button id="htmlnxtbtn" class="btn btn-success">Next <span class="glyphicon glyphicon-chevron-right"></span></button>
         </div>
       </div>
     </div>
@@ -139,7 +139,7 @@
         </div>
         <div class="btnRight">
           <button class="previousbtn"><span class="glyphicon glyphicon-chevron-left"></span> Previous</button>
-          <button class="btn btn-success">Next <span class="glyphicon glyphicon-chevron-right"></span></button>
+          <button id="cssnxtbtn"class="btn btn-success">Next <span class="glyphicon glyphicon-chevron-right"></span></button>
         </div>
       </div>
     </div>
@@ -193,7 +193,7 @@
         </div>
         <div class="btnRight">
           <button class="previousbtn"><span class="glyphicon glyphicon-chevron-left"></span> Previous</button>
-          <button class="btn btn-success">Next <span class="glyphicon glyphicon-chevron-right"></span></button>
+          <button id="jsnxtbtn" class="btn btn-success">Next <span class="glyphicon glyphicon-chevron-right"></span></button>
         </div>
       </div>
     </div>
@@ -246,23 +246,28 @@
           <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="Expert"> Expert
         </label>
         <div class="btnRight">
-          <button class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left"></span> Previous</button>
-          <button class="btn btn-success">Next <span class="glyphicon glyphicon-chevron-right"></span></button>
+          <button id ="successPrebtn"class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left"></span> Previous</button>
+          <button id="successNxtbtn" class="btn btn-success">Next <span class="glyphicon glyphicon-chevron-right"></span></button>
         </div>
       </div>
     </div>
     <!-- Question 3 END -->
     <!-- Thank you -->
-    <div class="jumbotron question" id="thanks">
+    <div id="thanks"class="jumbotron question">
       <h1>Thank You!</h1>
       <p>Your Front-end Technology Survey answers were submitted successfully.</p>
-      <p><button class="btn btn-default btn-lg">View Answers</button> <button class="btn btn-danger">Delete Answers</button></p>
+      <p><button id="Showanswer"class="btn btn-default btn-lg">View Answers</button> <button class="btn btn-danger">Delete Answers</button></p>
     </div>
     <!-- Thank you END-->
     <!-- Show answers in new view (div)
     -
     -
     -->
+    <div id="answer" class="AnswerDIv" >
+      <h1>Your Answers</h1>
+
+
+    </div>
   </div>
 
   <script type="text/javascript" src="vendor/jquery-3.1.1.min.js"></script>
