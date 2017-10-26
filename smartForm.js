@@ -1,14 +1,11 @@
 // Your jQuery goes here
 var userData={};
-/*if(localStorage.getItem('userData')){
+if(localStorage.getItem('userData')){
   userData=JSON.parse(localStorage.getItem('userData'));
   $('.question').hide();
   $('#'+userData.currentQuestion).show();
-  $("#name").val(userData.name);
-  $("#email").val(userData.email);
-  $("#nextbtn").prop("disabled",false);
 }
-else {*/
+else {
   userData = {
   name:"",
   email:"",
@@ -19,11 +16,13 @@ else {*/
   currentQuestion:"",
   pos:[]
   };
-//  localStorage.setItem('userData',JSON.stringify(userData));
-//}
+  localStorage.setItem('userData',JSON.stringify(userData));
+}
 $("#startbtn").click(function(event){
   $("#welcome").hide();
   $("#q1").show();
+  userData.currentQuestion = "q1";
+  localStorage.setItem('userData',JSON.stringify(userData));
 });
 
 $("#name").change(function(event){
@@ -36,7 +35,6 @@ $("#nextbtn").click(function(event){
   if(!$("#name").val())
   {
     alert("Name Is Empty");
-    //$("#nextbtn").prop("disabled",true);
     return false;
   }
   var emailval = $("#email").val();
@@ -55,187 +53,279 @@ $("#nextbtn").click(function(event){
 
   userData.name=$("#name").val();
   userData.email = $("#email").val();
-  /*userData.currentQuestion = "q1";
-  localStorage.setItem('userData',JSON.stringify(userData));*/
+  userData.currentQuestion = "q2";
+  localStorage.setItem('userData',JSON.stringify(userData));
 
 });
-
-/////////////////////// RUle one its a bit buggy ////////////
-/*var x,y,z;
 
 $("#htmlbtn").click(function(event){
   $("#q2").hide();
   $("#q2a").show();
   $("#htmlbtn").prop("disabled",true);
-  x=1;
+  userData.currentQuestion = "q2a";
+  localStorage.setItem('userData',JSON.stringify(userData));
+
 });
 
 $("#cssbtn").click(function(event){
   $("#q2").hide();
   $("#q2b").show();
   $("#cssbtn").prop("disabled",true);
-  y=1;
+  userData.currentQuestion = "q2b";
+  localStorage.setItem('userData',JSON.stringify(userData));
+
 });
 
 $("#jsbtn").click(function(event){
   $("#q2").hide();
   $("#q2c").show();
   $("#jsbtn").prop("disabled",true);
-  z=1;
+  userData.currentQuestion = "q2c";
+  localStorage.setItem('userData',JSON.stringify(userData));
+
 });
 
-$("#htmlnxtbtn").click(function(event){
-  if(y==1 && z==1){
-    $("#q2a").hide();
-    $("#q3").show();
-  }
-  else {
-    $("#q2a").hide();
-    $("#q2").show();
-  }
+//////////////////////////////////////html likes and dislikes/////////////////////////////
+$(".checkbox").click(function(event){
+  userData.html.likes=[];
+  $.each($("input[name='likesHTML']:checked"), function(){
+      userData.html.likes.push(this.id);
+  });
+  $.each($("input[name='DislikesHTML']:checked"), function(){
+      userData.html.dislikes.push(this.id);
+  });
+  userData.currentQuestion = "q2a";
+	localStorage.setItem('userData',JSON.stringify(userData));
+	userData=JSON.parse(localStorage.getItem('userData'));
 });
 
-$("#cssnxtbtn").click(function(event){
-  if(x==1 && z==1){
-    $("#q2b").hide();
-    $("#q3").show();
-  }
-  else {
-    $("#q2b").hide();
-    $("#q2").show();
-  }
-});
-
-$("#jsnxtbtn").click(function(event){
-  if(x==1 && y==1){
-    $("#q2c").hide();
-    $("#q3").show();
-  }
-  else {
-    $("#q2c").hide();
-    $("#q2").show();
-    }
-});*/
-
-////////////////////////////////rule 2////////////////////////////
-
-$("#htmlbtn").click(function(event){
-  $("#q2").hide();
-  $("#q2a").show();
-  $("#htmlbtn").prop("disabled",true);
-});
-
-$("#cssbtn").click(function(event){
-  $("#q2").hide();
-  $("#q2b").show();
-  $("#cssbtn").prop("disabled",true);
-});
-
-$("#jsbtn").click(function(event){
-  $("#q2").hide();
-  $("#q2c").show();
-  $("#jsbtn").prop("disabled",true);
-});
-
-
-//var checkboxarray=[];
 $("#htmlnxtbtn").click(function(event){
   if($("#cssbtn").prop("disabled") && $("#jsbtn").prop("disabled")){
-    /*$('#htmlLikeCHeckbox :checked').each(function() {
-      userData.html.likes.push($(this).val());
-    });
-    $(".htmlLckeckbox:checked").each(function(){
-      checkboxarray.push($(this).val());
-    });
-    for(var i=0;i<4;i++)
-    {
-      console.log(checkboxarray[i]);
-    }*/
-
     $("#q2a").hide();
     $("#q3").show();
+    userData.currentQuestion = "q3";
+    localStorage.setItem('userData',JSON.stringify(userData));
+
   }
   else {
-    /* $('#htmlLikeCHeckbox :checked').each(function() {
-      userData.html.likes.push($(this).val());
-    });
-   $(".htmlLckeckbox:checked").each(function(){
-      checkboxarray.push($(this).val());
-    });
-    for(var i=0;i<4;i++)
-    {
-      console.log(checkboxarray[i]);
-    }*/
-    $("#q2a input[name='likesHTML']").click(function(event){
-			if (this.checked) {
-        userData.pos[0] = true;
-        console.log($("input[name='likesHTML']").index(this));
-        userData.html.likes.push($("input[name='likesHTML']").index(this));
-				//userData.currentQuestion = "q2a";
-        //localStorage.setItem('userData', JSON.stringify(userData));
-				//console.log(JSON.stringify(userData));
-			}
-});
-
     $("#q2a").hide();
     $("#q2").show();
+    userData.currentQuestion = "q2";
+    localStorage.setItem('userData',JSON.stringify(userData));
+    userData=JSON.parse(localStorage.getItem('userData'));
   }
+});
+
+///////////////////////////////CSS LIkes and Dislikes//////////////////////////
+$(".checkbox").click(function(event){
+  $.each($("input[name='likesCSS']:checked"), function(){
+      userData.css.likes.push(this.id);
+  });
+  $.each($("input[name='DislikesCSS']:checked"), function(){
+      userData.css.dislikes.push(this.id);
+  });
+  userData.currentQuestion = "q2b";
+  localStorage.setItem('userData',JSON.stringify(userData));
+  userData=JSON.parse(localStorage.getItem('userData'));
 });
 
 $("#cssnxtbtn").click(function(event){
   if($("#htmlbtn").prop("disabled") && $("#jsbtn").prop("disabled")){
     $("#q2b").hide();
     $("#q3").show();
+    userData.currentQuestion = "q3";
+    localStorage.setItem('userData',JSON.stringify(userData));
+
   }
   else {
     $("#q2b").hide();
     $("#q2").show();
+    userData.currentQuestion = "q2";
+    localStorage.setItem('userData',JSON.stringify(userData));
+    userData=JSON.parse(localStorage.getItem('userData'));
   }
+});
+
+//////////////////////////////////////////////////JS likes and dislikes///////////////////////////
+$(".checkbox").click(function(event){
+  $.each($("input[name='likesJS']:checked"), function(){
+      userData.js.likes.push(this.id);
+  });
+  $.each($("input[name='DislikesJS']:checked"), function(){
+      userData.js.dislikes.push(this.id);
+  });
+  userData.currentQuestion = "q2c";
+	localStorage.setItem('userData',JSON.stringify(userData));
+	userData=JSON.parse(localStorage.getItem('userData'));
 });
 
 $("#jsnxtbtn").click(function(event){
   if($("#cssbtn").prop("disabled") && $("#htmlbtn").prop("disabled")){
+
     $("#q2c").hide();
     $("#q3").show();
+    userData.currentQuestion = "q3";
+    localStorage.setItem('userData',JSON.stringify(userData));
+
   }
   else {
     $("#q2c").hide();
     $("#q2").show();
+    userData.currentQuestion = "q2";
+    localStorage.setItem('userData',JSON.stringify(userData));
+    userData=JSON.parse(localStorage.getItem('userData'));
     }
 });
 
-$("#successPrebtn").click(function(event){
+////////////////working with strengths quesitons///////////
+/*$(".radio").click(function(event){
+	$.each($("input[name='HTMLRadioOptions']:checked"), function(){
+		userData.strengths.html="#"+this.id;
+});
+$.each($("input[name='CSSRadioOptions']:checked"), function(){
+	userData.strengths.css="#"+this.id;
+});
+$.each($("input[name='JSRadioOptions']:checked"), function(){
+	userData.strengths.js="#"+this.id;
+});
+
+userData.currentQuestion = "q3";
+localStorage.setItem('userData',JSON.stringify(userData));
+userData=JSON.parse(localStorage.getItem('userData'));
+});*/
+
+
+$("#strengthPrebtn").click(function(event){
   $("#q3").hide();
   $("#q2").show();
+  userData.currentQuestion = "q2";
+  localStorage.setItem('userData',JSON.stringify(userData));
   $("#htmlbtn").prop("disabled",false);
   $("#cssbtn").prop("disabled",false);
   $("#jsbtn").prop("disabled",false);
 });
 
-$("#successNxtbtn").click(function(event){
+/*$("#strengthNxtbtn").click(function(event){
+	if(userData.strengths.js=="" || userData.strengths.html==""||userData.strengths.css==""){
+		alert("Please choose all strength options...");
+	}
+	else{
+  $("#q3").fadeOut(500);
+  $("#thanks").show();
+	userData.currentQuestion = "thanks";
+	localStorage.setItem('userData',JSON.stringify(userData));
+	}
+});*/
+
+$("#strengthNxtbtn").click(function(event){
   $("#q3").hide();
   $("#thanks").show();
+  userData.currentQuestion = "thanks";
+  localStorage.setItem('userData',JSON.stringify(userData));
+
 });
+
+/////////////////////////////////Answers//////////////////////
 
 $("#Showanswer").click(function(event){
   $("#thanks").hide();
   $("#answer").show();
-  document.write("Name: "+ userData.name);
-  document.write("Email: "+ userData.email);
+//  userData.currentQuestion = "answer";
+//  localStorage.setItem('userData',JSON.stringify(userData));
 
-  $("#q2a input[name='likesHTML']").each(function() {
-    if(this.checked){
-     str = this.value;
-    console.log(str);
-   }
-  });
+  document.write("Name: "+ userData.name+"<br>");
+  document.write("Email: "+ userData.email+"<br>");
 
+  //////////html likes display/////////////////
+/*  var temp="";var temp2;
+		if(userData.html.likes.length===0){
+			 temp="No possible likes";
+		}
+		else{
+			for(var i=0; i<userData.html.likes.length; i++){
+				temp2= "#"+userData.html.likes[i];
+			 temp = $(temp2).val();
+       document.getElementById('ansHTMLlikes').innerHTML = "<strong>HTML Likes: </strong></br>"+ temp;
 
+			}
+		}
+	var htmlLikes;
+	if(userData.html.likes.length==0){
+		 document.write("No HTML liked Attributes"+"<br>")
+	}
+	else{
+		for(var i=0; i<userData.html.likes.length; i++){
+			htmlLikes="#"+userData.html.likes[i];
+		  document.write("HTML Likes: "+ $(htmlLikes).val()+"<br>");
+		}
+	}
 
-
+  //////////html dislikes display/////////////////
+  var htmldisLikes;
+	if(userData.html.dislikes.length==0){
+		 document.write("No HTML disliked Attributes"+"<br>")
+	}
+	else{
+		for(var i=0; i<userData.html.dislikes.length; i++){
+			htmldisLikes="#"+userData.html.dislikes[i];
+		  document.write("HTML Disikes: "+ $(htmldisLikes).val()+"<br>");
+		}
+	}
+  //////////css likes display/////////////////
+  var cssLikes;
+	if(userData.css.likes.length==0){
+		 document.write("No CSS liked Attributes"+"<br>")
+	}
+	else{
+		for(var i=0; i<userData.css.likes.length; i++){
+			cssLikes="#"+userData.css.likes[i];
+		  document.write("CSS Likes: "+$(cssLikes).val()+"<br>");
+		}
+	}
+  //////////CSS dislikes display/////////////////
+  var cssdisLikes;
+	if(userData.css.dislikes.length==0){
+		 document.write("No CSS disliked Attributes"+"<br>")
+	}
+	else{
+		for(var i=0; i<userData.css.dislikes.length; i++){
+			cssdisLikes="#"+userData.css.dislikes[i];
+		  document.write("CSS Disikes: "+$(cssdisLikes).val()+"<br>");
+		}
+	}
+  //////////Js likes display/////////////////
+  var jsLikes;
+  if(userData.js.likes.length==0){
+     document.write("No JS liked Attributes"+"<br>")
+  }
+  else{
+    for(var i=0; i<userData.js.likes.length; i++){
+      jsLikes="#"+userData.js.likes[i];
+      document.write("JS Likes: "+$(jsLikes).val()+"<br>");
+    }
+  }
+  //////////JS dislikes display/////////////////
+  var jsdisLikes;
+	if(userData.js.dislikes.length==0){
+		 document.write("No JS disliked Attributes"+"<br>")
+	}
+	else{
+		for(var i=0; i<userData.js.dislikes.length; i++){
+			jsdisLikes="#"+userData.js.dislikes[i];
+		  document.write("JS Disikes: "+$(jsdisLikes).val()+"<br>");
+		}
+	}*/
 });
 
 $(".previousbtn").click(function(event){
   $("#q2").show();
+  userData.currentQuestion = "q2";
+  localStorage.setItem('userData',JSON.stringify(userData));
   $(this).parent().parent().parent().hide();
+});
+
+$(".delete").click(function(event){
+  delete userData;
+  $("answer").hide();
+  $("welcome").show();
 });
